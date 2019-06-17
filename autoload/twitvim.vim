@@ -3009,20 +3009,25 @@ function! s:twitter_win(wintype)
         execute twit_bufnr . "wincmd w"
     else
         let newwin = 1
-        silent execute "new " . winname
         
         if a:wintype == "timeline"
           if exists('g:twitvim_open_position')
-           if g:twitvim_open_position == "top" 
-             wincmd K
-           elseif g:twitvim_open_position == "bottom" 
-             wincmd J
-           elseif g:twitvim_open_position == "right" 
-             wincmd L
-           elseif g:twitvim_open_position == "left" 
-             wincmd H
-           endif
+            if g:twitvim_open_position == "top" 
+              silent execute "topleft new " . winname
+            elseif g:twitvim_open_position == "bottom" 
+              silent execute "botright new " . winname
+            elseif g:twitvim_open_position == "right" 
+              silent execute "rightbelow new " . winname
+            elseif g:twitvim_open_position == "left" 
+              silent execute "leftabove new " . winname
+            else
+              silent execute "new " . winname
+            endif
+          else
+            silent execute "new " . winname
           endif
+        else
+          silent execute "new " . winname
         endif
 
         setlocal noswapfile
