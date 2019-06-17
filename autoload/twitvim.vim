@@ -3029,6 +3029,10 @@ function! s:twitter_win(wintype)
         else
           silent execute "new " . winname
         endif
+        
+        if exists('g:twitvim_lines_default')
+          resize g:twitvim_count + 2
+        endif
 
         setlocal noswapfile
         setlocal buftype=nofile
