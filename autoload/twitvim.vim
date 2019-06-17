@@ -3031,7 +3031,8 @@ function! s:twitter_win(wintype)
         endif
         
         if exists('g:twitvim_lines_default')
-          resize g:twitvim_count + 2
+          let best_lines = g:twitvim_count + 2
+          silent execute "resize " . best_lines
         endif
 
         setlocal noswapfile
