@@ -3010,7 +3010,21 @@ function! s:twitter_win(wintype)
     else
         let newwin = 1
         silent execute "new " . winname
-        silent execute "wincmd J"
+        
+        if a:wintype == "timeline"
+          if exists('g:twitvim_open_position')
+           if g:twitvim_open_position == "top" 
+             wincmd K
+           else if g:twitvim_open_position == "bottom" 
+             wincmd J
+           else if g:twitvim_open_position == "right" 
+             wincmd L
+           else if g:twitvim_open_position == "left" 
+             wincmd H
+           endif
+          endif
+        endif
+
         setlocal noswapfile
         setlocal buftype=nofile
         setlocal bufhidden=delete
