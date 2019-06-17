@@ -3009,7 +3009,7 @@ function! s:twitter_win(wintype)
         execute twit_bufnr . "wincmd w"
     else
         let newwin = 1
-        silent execute "new " . winname
+        silent execute "bo new " . winname
         setlocal noswapfile
         setlocal buftype=nofile
         setlocal bufhidden=delete
