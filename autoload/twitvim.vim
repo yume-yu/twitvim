@@ -453,7 +453,7 @@ function! s:surrogate_pair(n1, n2)
     return nr2char(or((a:n1 - 0xd800) * 1024, and((a:n2 - 0xdc00), 0x3ff)) + 0x10000)
 endfunction
 
-function! s:parse_json(str,..)
+function! s:parse_json(str,...)
     try
         if has('patch-8.0.171')
             return json_decode(a:str)
