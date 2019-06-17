@@ -3197,18 +3197,28 @@ endfunction
 function! s:format_status_json(item)
     let item = a:item
 
-    if exists('g:twitvim_show_username')
-      let user = get(get(item, 'user', {}), 'name', '')
-    else
-      let user = get(get(item, 'user', {}), 'screen_name', '')
-    endif
+    let user = get(get(item, 'user', {}), 'screen_name', '')
+    let username = get(get(item, 'user', {}), 'name', '')
     let text = s:format_retweeted_status_json(item)
     if text == ''
         let text = s:convert_entity(s:get_status_text_json(item))
     endif
     let pubdate = s:time_filter(get(item, 'created_at', ''))
+    "count names characters
+    let names_length = strwidth(username.'(@'. user. ')')
+    "let names_length = strlen(substitute(username.'(@'. user. ')', "\U1234", "xx", "g"))
+    let space = ""
 
-    return user.': '.text.' |'.pubdate.'|'
+    while 1
+      if names_length >= 50
+        break
+      endif
+      let space = space . " "
+      let names_length = names_length + 1
+    endwhile
+
+
+    return space . username.'(@'. user. '): ' .text.' |'.pubdate.'|'
 endfunction
 
 " Get in-reply-to from a status element. If this is a retweet, use the id of
