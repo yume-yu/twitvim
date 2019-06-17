@@ -3197,7 +3197,11 @@ endfunction
 function! s:format_status_json(item)
     let item = a:item
 
-    let user = get(get(item, 'user', {}), 'screen_name', '')
+    if exists('g:twitvim_show_username')
+      let user = get(get(item, 'user', {}), 'name', '')
+    else
+      let user = get(get(item, 'user', {}), 'screen_name', '')
+    endif
     let text = s:format_retweeted_status_json(item)
     if text == ''
         let text = s:convert_entity(s:get_status_text_json(item))
