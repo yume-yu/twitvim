@@ -3015,11 +3015,11 @@ function! s:twitter_win(wintype)
           if exists('g:twitvim_open_position')
            if g:twitvim_open_position == "top" 
              wincmd K
-           else if g:twitvim_open_position == "bottom" 
+           elseif g:twitvim_open_position == "bottom" 
              wincmd J
-           else if g:twitvim_open_position == "right" 
+           elseif g:twitvim_open_position == "right" 
              wincmd L
-           else if g:twitvim_open_position == "left" 
+           elseif g:twitvim_open_position == "left" 
              wincmd H
            endif
           endif
