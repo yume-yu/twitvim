@@ -748,7 +748,7 @@ function! s:read_tokens()
             call s:errormsg('Old token file format is not supported. Please remove "'.tokenfile.'" and try again.')
             return
         else
-            let json_obj = s:parse_json(tokens[0],...)
+            let json_obj = s:parse_json(tokens[0], 1)
             let current_user = json_obj['current_user']
             let service = get(json_obj, 'current_service', s:default_service)
             let json_tokens = json_obj['tokens']
